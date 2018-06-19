@@ -1,0 +1,22 @@
+{
+  "name": "coinadvisor-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon ./api/index",
+    "start": "NODE_ENV=production node ./api/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
