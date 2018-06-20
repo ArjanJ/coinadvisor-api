@@ -4,6 +4,6 @@ const path = require('path');
 const router = Router();
 const authRouter = require('./auth');
 
-router.use('/auth', authRouter);
+router.use('/api/auth', authRouter);
 
 module.exports = router;
