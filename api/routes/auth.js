@@ -26,7 +26,11 @@ authRouter.get(
   (req, res) => {
     // Strip out uneeded fields to reduce token size.
     const profile = buildProfile(req.user);
-    const token = jwt.sign(profile, JWT_SECRET);
+    // 1 week from now.
+    const expiresIn = 86400 * 7;
+    const token = jwt.sign(profile, JWT_SECRET, {
+      expiresIn,
+    });
     res.cookie('SID', token).redirect('/');
   },
 );
