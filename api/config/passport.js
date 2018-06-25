@@ -18,10 +18,6 @@ const passportConfig = () => {
 
   passport.use(
     new JwtStrategy(opts, (jwtPayload, done) => {
-      if (!jwtPayload) {
-        console.log('herhe22');
-        return done(true, null);
-      }
       return done(null, jwtPayload);
     }),
   );
