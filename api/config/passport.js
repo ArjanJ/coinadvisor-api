@@ -11,14 +11,18 @@ const {
 } = process.env;
 
 const passportConfig = () => {
-  const opts = {};
-  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-  opts.secretOrKey = JWT_SECRET;
-  opts.issuer = JWT_ISSUER;
+  const opts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    secretOrKey: JWT_SECRET,
+  };
 
   passport.use(
-    new JwtStrategy(opts, (_jwtPayload, done) => {
-      return done();
+    new JwtStrategy(opts, (jwtPayload, done) => {
+      if (!jwtPayload) {
+        console.log('herhe22');
+        return done(true, null);
+      }
+      return done(null, jwtPayload);
     }),
   );
 
@@ -29,7 +33,7 @@ const passportConfig = () => {
         clientSecret: GOOGLE_CLIENT_SECRET,
         callbackURL: 'http://localhost:8080/api/auth/google/callback',
       },
-      (accessToken, refreshToken, profile, done) => {
+      (_accessToken, _refreshToken, profile, done) => {
         done(null, profile);
       },
     ),
